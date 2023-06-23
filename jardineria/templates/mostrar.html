@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar</title>
+    {% load static %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2>Catálogo de jardineria</h2>
+        <br><br>
+        <div class="row">
+            {%  for jardin in jardineria %}
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    {% if jardin.imagen %}
+                        <img src="{{ jardin.imagen.url }}" class="card-img-top mx-jardin">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">codigo:{{ jardin.codigo }}</h4>
+                        <p class="card-text">
+                            nombre: {{ jardin.nombre }}<br>
+                            categoria: {{ jardin.categoria }}
+                       </p>
+                       <a href="{% url 'modificar' jardin.codigo %}" class="btn btn-warning">Modificar</a>
+                       <a href="{% url 'index' %}" class="btn btn-success">Inicio</a>
+                       
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
